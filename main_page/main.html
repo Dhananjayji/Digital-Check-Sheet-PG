@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Checksheet</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="../images/pg_logo.png" alt="Logo">
+        </div>
+        <h1 id="h1-text">DIGITAL CHECKSHEET</h1>
+        <!-- <nav>
+            <a class="button" id="login" href="../login_page/login.html">Login</a>
+            <a class="button" id="signup" href="../signup_page/signup.html">Sign Up</a>
+        </nav> -->
+    </header>
+
+    <main>
+        <div class="button-container">
+            <!-- Mould Shop Button -->
+            <a href="#" class="button" id="mouldShopBtn">Mould Shop</a>
+
+            <!-- Hidden buttons for Mould Shop -->
+            <div id="hiddenButtonsMouldShop" class="hidden-buttons">
+                <button class="close-btn" id="closeMouldShop">&times;</button>
+                <a href="../mould_shop/time_check_table.html"> <button class="sheet-btn">Time Check Sheet</button></a>
+               
+                <button class="sheet-btn">Sheet 2</button>
+                <button class="sheet-btn">Sheet 3</button>
+                <button class="sheet-btn">Sheet 4</button>
+                <button class="sheet-btn">Sheet 5</button>
+            </div>
+
+            <!-- AC IDU Line Button -->
+            <a href="#" class="button" id="iduLineBtn">AC IDU Line</a>
+
+            <!-- Hidden buttons for AC IDU Line -->
+            <div id="hiddenButtonsIduLine" class="hidden-buttons">
+                <button class="close-btn" id="closeIduLine">&times;</button>
+                <button class="sheet-btn">IDU Sheet 1</button>
+                <button class="sheet-btn">IDU Sheet 2</button>
+                <button class="sheet-btn">IDU Sheet 3</button>
+                <button class="sheet-btn">IDU Sheet 4</button>
+                <button class="sheet-btn">IDU Sheet 5</button>
+            </div>
+
+            <!-- AC ODU Line Button -->
+            <a href="#" class="button" id="oduLineBtn">AC ODU Line</a>
+
+            <!-- Hidden buttons for AC ODU Line -->
+            <div id="hiddenButtonsOduLine" class="hidden-buttons">
+                <button class="close-btn" id="closeOduLine">&times;</button>
+                <button class="sheet-btn">ODU Sheet 1</button>
+                <button class="sheet-btn">ODU Sheet 2</button>
+                <button class="sheet-btn">ODU Sheet 3</button>
+                <button class="sheet-btn">ODU Sheet 4</button>
+                <button class="sheet-btn">ODU Sheet 5</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Mould Shop button functionality
+        const mouldShopBtn = document.getElementById('mouldShopBtn');
+        const hiddenButtonsMouldShop = document.getElementById('hiddenButtonsMouldShop');
+        const closeMouldShop = document.getElementById('closeMouldShop');
+
+        mouldShopBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+            hiddenButtonsMouldShop.style.display = 'flex';
+        });
+
+        closeMouldShop.addEventListener('click', function() {
+            hiddenButtonsMouldShop.style.display = 'none';
+        });
+
+        // AC IDU Line button functionality
+        const iduLineBtn = document.getElementById('iduLineBtn');
+        const hiddenButtonsIduLine = document.getElementById('hiddenButtonsIduLine');
+        const closeIduLine = document.getElementById('closeIduLine');
+
+        iduLineBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+            hiddenButtonsIduLine.style.display = 'flex';
+        });
+
+        closeIduLine.addEventListener('click', function() {
+            hiddenButtonsIduLine.style.display = 'none';
+        });
+
+        // AC ODU Line button functionality
+        const oduLineBtn = document.getElementById('oduLineBtn');
+        const hiddenButtonsOduLine = document.getElementById('hiddenButtonsOduLine');
+        const closeOduLine = document.getElementById('closeOduLine');
+
+        oduLineBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+            hiddenButtonsOduLine.style.display = 'flex';
+        });
+
+        closeOduLine.addEventListener('click', function() {
+            hiddenButtonsOduLine.style.display = 'none';
+        });
+    </script>
+
+</body>
+</html>

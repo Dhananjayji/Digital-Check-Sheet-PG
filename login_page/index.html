@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel = "stylesheet" href = "login.css">
+
+</head>
+<body>
+  
+  <section>
+<div class = "form-container">
+  <form action = "">
+   <h2>Login</h2>
+   <div class = "inputbox">
+    <ion-icon name = "person-outline"></ion-icon>
+   <input type = "text" id = "username" required />
+   <label for = "username">User Id</label>
+   </div>
+
+   <div class = "inputbox">
+    <ion-icon name = "lock-closed-outline"></ion-icon>
+   <input type = "password" id="password" required />
+   <label for = "password">Password</label>
+   </div>
+
+   <!-- <div class = "forget">
+    <label>Remember me <a href = "#">Forget Password</a></label>
+   </div> -->
+   <button type = "button" id = "loginButton">Log In</button>
+   <!-- <div class = "register">
+    <p>Don't have a account? <a href ="./signup.html" target="_self" class="btn">Register</a></p> 
+    <a href = "./signup/signup.html" target="_self" class="btn">Register</a> -->
+
+   
+  
+
+  </form>
+
+</div>
+  </section>
+  <!-- javascript for login logic -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      document.getElementById("loginButton").onclick = function() {
+        // Hardcoded login credentials
+        var correctUsername = "user";
+        var correctPassword = "12345";
+
+        // Get user input
+        var username = document.getElementById("username").value.trim();
+        var password = document.getElementById("password").value.trim();
+
+        // Check credentials
+        if (username === correctUsername && password === correctPassword) {
+          // Redirect to main page if login is successful
+          window.location.href = "../main_page/main.html"; // Replace with the actual page URL
+        } else {
+          // Display error message if login fails
+          alert("Invalid credentials. Please try again.");
+        }
+      };
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/ionicons@5.0.1/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>
+
+
+
+
+
