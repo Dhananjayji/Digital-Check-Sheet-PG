@@ -1,377 +1,350 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="widtd=device-widtd, initial-scale=1.0">
-    <title>Complex Table Example</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .controls1 {
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Multi-Sheet Table</title>
+   <style>
+      body {
+         font-family: Arial, sans-serif;
+      }
+
+      .controls1 {
          display: inline-block;
-         position: fixed; /* Fix the buttons in place */
-         top: 0; /* Position at the top */
-         left: 0; /* Position at the left */
-         z-index: 999; /* Ensure it stays on top of other elements */
-         background-color: #f4f4f4; /* Optional: set background color to avoid overlap issues */
+         position: fixed;
+         top: 42px;
+         left: 0;
+         z-index: 999;
+         background-color: #f4f4f4;
          padding: 10px;
-         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: add shadow effect */
-        }
+         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
 
-        .controls2 {
+      .controls2 {
          display: inline-block;
-         position: fixed; /* Fix the buttons in place */
-         top: 0; /* Position at the top */
-         right: 0; /* Position at the left */
-         z-index: 999; /* Ensure it stays on top of other elements */
-         background-color: #f4f4f4; /* Optional: set background color to avoid overlap issues */
+         position: fixed;
+         top: 42px;
+         right: 0;
+         z-index: 999;
+         background-color: #f4f4f4;
          padding: 10px;
-         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: add shadow effect */
-        }
+         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 
-      
+      }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            /* margin: 20px 0; */
-            font-size: 12px;
-            margin-top: 50px;
-            /* background-color: red; */
-        }
-       
-        th, td {
-            /* padding: 0px; */
-            border: 2px solid #ddd;
-            text-align: center;
-            background-color: #f4f4f4;
-            font-weight: bold;
-            /* padding: 0px; */
-        }
-        th {
-            font-weight: bold;
-        }
-        
-        /* .text-left {
-            text-align: left;
-        }
-        .text-right {
-            text-align: right;
-        }
-        .highlight {
-            background-color: #ffeb3b;
-        }
-        .bold {
-            font-weight: bold;
-        }
-        .colspan {
-            background-color: #e0f7fa;
-        } */
-         .c{
-            text-align: left;
-            
-         }
-         .image {
-            display: block; 
-           
-            align-items: center;
-            
-        }
-        .selected {
-         background-color: rgb(97, 190, 97);
-        }
-        /* .department-cell {
+      .sheet-buttons {
          display: flex;
-         align-items: left;
+         overflow-x: auto;
+         white-space: nowrap;
+         position: fixed;
+         top: 0px;
+         margin-bottom: 20px;
+         background-color: #f4f4f4;
+         padding: 10px;
+         text-align: center;
+         z-index: 999;
+         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      .sheet-buttons button {
+         flex-shrink: 0;
+         margin-right: 10px;
+      }
+
+      .controls {
+         display: inline-block;
+         position: fixed;
+         top: 42px;
+         left: 0px;
+
+      }
+
+      /* .sheet-buttons button {
+         margin-right: 10px;
+         padding: 10px 20px;
+         cursor: pointer;
+         background-color: #f0f0f0;
+         border: 1px solid #ccc;
+      } */
+
+      .sheet-buttons button.active {
+         background-color: #007bff;
+         color: white;
+         border: 1px solid #0056b3;
+      }
+
+      table {
+         width: 100%;
+         border-collapse: collapse;
+         font-size: 12px;
+
+         margin-top: 86px;
+      }
+
+      th,
+      td {
+         border: 1px solid #ccc;
+         text-align: center;
+         background-color: #f4f4f4;
+         /* padding: 10px; */
+         padding-left: 2px;
+         text-align: center;
+
+      }
+
+      th {
+         font-weight: bold;
+      }
+
+      td.selected {
+         background-color: rgb(118, 182, 118);
+      }
+
+      /* .controls {
+            margin-top: 20px;
         } */
 
-        /* .department-cell input {
-         font-size:4;
-         border: 1px solid transparent;
-         border-radius: 4px;
-         outline: none;
-         background-color: transparent;
-         color: transparent;
-         transition: border-color 0.3s, background-color 0.3s,color 0.3s;
-        }
-        .department-cell input:focus {
-         border-color: #007bff;
-         background-color: #e0f3ff;
-         color: #000;
-        }
-        .department-cell input:not(:focus):not(:placeholder-shown) {
-         border-color: transparent;
-         background-color: transparent;
-         color: #000;
+      /* .controls button {
+            margin-right: 10px;
+            padding: 10px 15px;
+            cursor: pointer;
         } */
+      .c {
+         text-align: left;
+      }
 
-        /* Define relative column widths */
-        th:first-child(1), td:first-child(1) {
-         width:20%;
-        }
-        th:nth-child(2), td:nth-child(2) {
+      .image {
+         display: block;
+         align-items: center;
+      }
+
+      th:first-child(1),
+      td:first-child(1) {
          width: 6%;
-        }
-        th:nth-child(3), td:nth-child(3) {
+      }
+
+      th:nth-child(2),
+      td:nth-child(2) {
+         width: 12%;
+      }
+
+      th:nth-child(3),
+      td:nth-child(3) {
          width: 6%;
-        }
-        th:nth-child(4), td:nth-child(4) {
+      }
+
+      th:nth-child(4),
+      td:nth-child(4) {
          width: 6%;
-        }
-        th:nth-child(5), td:nth-child(5) {
+      }
+
+      th:nth-child(5),
+      td:nth-child(5) {
          width: 6%;
-        }
-        th:nth-child(6), td:nth-child(6) {
+      }
+
+      th:nth-child(6),
+      td:nth-child(6) {
          width: 6%;
-        }
-        th:nth-child(7), td:nth-child(7) {
+      }
+
+      th:nth-child(7),
+      td:nth-child(7) {
          width: 6%;
-        }
-        th:nth-child(8), td:nth-child(8) {
+      }
+
+      th:nth-child(8),
+      td:nth-child(8) {
          width: 6%;
-        }
-        th:nth-child(9), td:nth-child(9) {
+      }
+
+      th:nth-child(9),
+      td:nth-child(9) {
          width: 6%;
-        }
-        th:nth-child(10), td:nth-child(10) {
+      }
+
+      th:nth-child(10),
+      td:nth-child(10) {
          width: 6%;
-        }
-        th:nth-child(11), td:nth-child(11) {
+      }
+
+      th:nth-child(11),
+      td:nth-child(11) {
          width: 6%;
-        }
-        th:nth-child(12), td:nth-child(12) {
+      }
+
+      th:nth-child(12),
+      td:nth-child(12) {
          width: 6%;
-        }
-        th:nth-child(13), td:nth-child(13) {
+      }
+
+      th:nth-child(13),
+      td:nth-child(13) {
          width: 6%;
-        }
-        th:nth-child(14), td:nth-child(14) {
+      }
+
+      th:nth-child(14),
+      td:nth-child(14) {
          width: 6%;
-        }
-         th:nth-child(15), td:nth-child(15) {
+      }
+
+      th:nth-child(15),
+      td:nth-child(15) {
          width: 6%;
-        } 
-        /* Print styles */
-        @media print {
+      }
+
+      th:nth-child(16),
+      td:nth-child(16) {
+         width: 6%;
+      }
+
+
+      @media print {
          body * {
-            visibility: hidden;  /*Hide all elements*/
+            visibility: hidden;
          }
-         table, table * {
-            visibility: visible; /*show only the table*/
+
+         table,
+         table * {
+            visibility: visible;
          }
-         /* table{
-            position: absolute;
-            top: 0;
-            left: 0;
-         } */
-        }
-         /* .inner-table { */
-         /* width: 100%; */
-         /* border-collapse: collapse; */
-        /* } */
-        /* .inner-table td { */
-         /* border: 2px solid #ddd; */
-         /* padding: 0; */
-        /* } */
-
-        /* .outer-td {
-         padding: 0;
-        }  */
-
-
-
-
-        /* .flex-container {
-            display: flex; */
-            /* justify-content: space-between; */
-            /* height: 100%;
-        } */
-        /* .flex-item { */
-         /* height: 100%; */
-            /* width: 49%; */
-            /* padding: 4px; */
-            /* border: none;
-            cursor: pointer; */
-            /* background-color: #f0f0f0; */
-            /* text-align: left;
-        } */
-        /* .flex-item.selected {
-            background-color: rgb(97, 190, 97);
-            color: white;
-            
-        } */
-
-
-
-    </style>
+      }
+   </style>
 </head>
+
 <body>
+   <div class="sheet-buttons">
+      <button id="sheet1" onclick="switchSheet(1)">Sheet 1</button>
+      <button id="sheet2" onclick="switchSheet(2)">Sheet 2</button>
+      <button id="sheet3" onclick="switchSheet(3)">Sheet 3</button>
+      <button id="sheet4" onclick="switchSheet(4)">Sheet 4</button>
+      <button id="sheet5" onclick="switchSheet(5)">Sheet 5</button>
+      <button id="sheet6" onclick="switchSheet(6)">Sheet 6</button>
+      <button id="sheet7" onclick="switchSheet(7)">Sheet 7</button>
+      <button id="sheet8" onclick="switchSheet(8)">Sheet 8</button>
+      <button id="sheet9" onclick="switchSheet(9)">Sheet 9</button>
+      <button id="sheet10" onclick="switchSheet(10)">Sheet 10</button>
+      <button id="sheet11" onclick="switchSheet(11)">Sheet 11</button>
+      <button id="sheet12" onclick="switchSheet(12)">Sheet 12</button>
+      <button id="sheet13" onclick="switchSheet(13)">Sheet 13</button>
+      <button id="sheet14" onclick="switchSheet(14)">Sheet 14</button>
+      <button id="sheet15" onclick="switchSheet(15)">Sheet 15</button>
+   </div>
 
-       <!-- <h2>Dhananjayji</h2> -->
-       
-       <div class="controls1">
-         <button onclick="setSelectedOption('OK')" style="background-color:rgb(118, 182, 118) ;">Set OK</button>
-         <button onclick="setSelectedOption('NG')" style="background-color:rgb(118, 182, 118) ;">Set NG</button>
-         <button onclick="setSelectedOption('')" style="background-color:rgb(118, 182, 118) ;">Clear Cell</button>
-         <button onclick="enterText()" style="background-color:rgb(118, 182, 118) ;">Enter Text</button>
-     </div>
+   <div class="controls1">
+      <button onclick="setSelectedOption('OK')" style="background-color:rgb(118, 182, 118) ;">Set OK</button>
+      <button onclick="setSelectedOption('NG')" style="background-color:rgb(118, 182, 118) ;">Set NG</button>
+      <button onclick="setSelectedOption('')" style="background-color:rgb(118, 182, 118) ;">Clear Cell</button>
+      <button onclick="enterText()" style="background-color:rgb(118, 182, 118) ;">Enter Text</button>
+   </div>
 
-     <div class="controls2">
+
+
+   <div class="controls2">
       <!-- <button onclick="saveTableData()" style="background-color:rgb(118, 182, 118) ;">Save</button> -->
 
       <button onclick="clearTableData()" style="background-color:rgb(118, 182, 118) ;">Reset Sheet</button>
       <button onclick="backToIndex()" style="background-color:rgb(118, 182, 118) ;">Back</button>
 
       <button onclick="printTable()" style="background-color:rgb(118, 182, 118) ;">Print</button>
-     </div>
+   </div>
 
-     <table id="dataTable">
-    <thead>
-      <tr>
-         <th colspan="1" style="align-items: center;" ><img class="image"  src="../images/pg_logo.png" alt="Logo" style="height: 50px; width: 100px;"></th>
-         <th colspan="12"  style= "font-size:20px">TIME CHECK REPORT(MOULDING)</th>
-            <th colspan="2"  style= "font-size:8px">Ref No:PGTL/QA/TCR/22<br> Issue No/Date:31.08.2024 <br> Rev No.:00,Rev date: 00</th>
-        </tr>
-    </thead>
-      <tbody> 
-        <tr>
-         <!-- <td colspan="1" class="department-cell"><span>Date:-</span><input type="text" placeholder=" "></td> -->
-          <td colspan="1" style="height: 0px;">
-            <div style="display: flex; flex-direction: row; height: 100%;">
-               <div class="c" style="width: 30%; height: 100%; ">Date:-</div>
-               <div onclick="selectCell(this)" style="width: 100%; border-left: 2px solid #ddd;"></div>
-           </div>
-          </td>
-            <td colspan="2" >SHIFT</td>
-            <td colspan="3" >A</td>
-            <td colspan="3" >B</td>
-            <td colspan="2" >SHIFT</td>
-            <td colspan="2" >A</td>
-            <td colspan="2" >B</td>
-        </tr>
-        <tr>
-            <!-- <td colspan="1" rowspan="2" class="department-cell"> -->
-               <td colspan="1" rowspan="2" style="height: 0px;"> 
-               <div style="height: 100%; display: flex; flex-direction: row;">
-                  <div class="c" style="width: 50%;">M/C NAME / NO.:-</div>
-                  <div onclick="selectCell(this)" style="height: 100%; width: 50%; border-left: 2px solid #ddd;"></div>
-               </div>
-            </td>
-            <td colspan="2" class="c">RAW MATERIAL & GRADE</td>
-            <td colspan="3"  onclick="selectCell(this)"></td>
-            <td colspan="3" onclick="selectCell(this)"></td>
-            <td colspan="2" class="c">MASTER BATCH & %</td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-        </tr>
-        <tr>
-            
-            <td colspan="2" class="c">PART NAME</td>
+   <table id="dataTable">
+      <thead>
+         <tr>
+            <th colspan="2" style="align-items: center;"><img class="image" src="../images/pg_logo.png" alt="Logo"
+                  style="height: 50px; width: 100px;"></th>
+            <th colspan="12" style="font-size:20px">TIME CHECK REPORT(MOULDING)</th>
+            <th colspan="2" style="font-size:8px">Ref No:PGTL/QA/TCR/22<br> Issue No/Date:31.08.2024 <br> Rev No.:00,Rev
+               date: 00</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr>
+            <th colspan="1" class="c">Date</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <th colspan="2">SHIFT</th>
+            <th colspan="3">A</th>
+            <th colspan="3">B</th>
+            <th colspan="2">SHIFT</th>
+            <th colspan="2">A</th>
+            <th colspan="2">B</th>
+         </tr>
+         <tr>
+            <th colspan="1" class="c" rowspan="2">M/C NAME / NO.</th>
+            <td colspan="1" rowspan="2" onclick="selectCell(this)"></td>
+            <th colspan="2" class="c">RAW MATERIAL & GRADE</th>
             <td colspan="3" onclick="selectCell(this)"></td>
             <td colspan="3" onclick="selectCell(this)"></td>
-            <td colspan="2" class="c">DATE:</td>
-            <!-- <td></td> -->
+            <th colspan="2" class="c">MASTER BATCH & %</th>
             <td colspan="2" onclick="selectCell(this)"></td>
             <td colspan="2" onclick="selectCell(this)"></td>
-        </tr>
-        <tr>
-            <!-- <td colspan="1" rowspan="3" class="department-cell"> -->
-               <!-- <td colspan="1" rowspan="3">  -->
+         </tr>
+         <tr>
 
-                  <td colspan="1" rowspan="3" style="height: 0px;">
-                     <div style="display: flex; flex-direction: row; height: 100%;">
-                         <div class="c" style="height: 100%; width: 50%;">MOULD CHANGE IF ANY</div>
-                         <div onclick="selectCell(this)" style="height: 100%; width: 50%; border-left: 2px solid #ddd;"></div>
-                     </div>
-                 </td>
-            <td colspan="2" class="c">PART NO.</td>
+            <th colspan="2" class="c">PART NAME</th>
+            <!-- <td colspan="1" onclick="selectCell(this)"></td> -->
             <td colspan="3" onclick="selectCell(this)"></td>
             <td colspan="3" onclick="selectCell(this)"></td>
-            <td colspan="2" class="c">OPERATOR NAME</td>
+            <th colspan="1" class="c">DATE:</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
             <td colspan="2" onclick="selectCell(this)"></td>
+            <!-- <th></th> -->
             <td colspan="2" onclick="selectCell(this)"></td>
-        </tr>
-        <tr>
-          
-            <td colspan="2" class="c">MODEL</td>
-            <td colspan="3" onclick="selectCell(this)"></td>
-            <td colspan="3" onclick="selectCell(this)"></td>
-            <td colspan="2" class="c" onclick="selectCell(this)">PROD. ENGINEER</td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-        </tr>
-        <tr>
-          
-            <td colspan="2" class="c">COLOUR</td>
-            <td colspan="3" onclick="selectCell(this)"></td>
-            <td colspan="3" onclick="selectCell(this)"></td>
-            <td colspan="2" class="c">QA. ENGINEER</td>
-            <!-- <td></td> -->
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-        </tr>
-        <tr>
-            <td class="c" colspan="1" >CHECK POINT AS PER PQC STD.</td>
-            <td colspan="2" class="c">SPECIFICATION</td>
-            <td colspan="1" >7-9</td>
-            <td colspan="1" >9-11</td>
-            <td colspan="1" >11-1</td>
-            <td colspan="1" >1-3</td>
-            <td colspan="1" >3-5</td>
-            <td colspan="1" >5-7</td>
-            <td colspan="1" >7-9</td>
-            <td colspan="1" >9-11</td>
-            <td colspan="1" >11-1</td>
-            <td colspan="1" >1-3</td>
-            <td colspan="1" >3-5</td>
-            <td colspan="1" >5-7</td>
          </tr>
          <tr>
-            <td class="c" colspan="1" >DIMENSION</td>
+            <th colspan="1" rowspan="3" class="c">Mould Change If Any</th>
+            <td colspan="1" rowspan="3"onclick="selectCell(this)"></td>
+
+            <th colspan="2" class="c">PART NO.</th>
+            <td colspan="3" onclick="selectCell(this)">
+               </th>
+            <td colspan="3" onclick="selectCell(this)"></td>
+            <th colspan="2" class="c">OPERATOR NAME</th>
             <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-           
+            <td colspan="2" onclick="selectCell(this)"></td>
          </tr>
          <tr>
-            <td colspan="1" style="height: 0px;">
-               <div style="height: 100%; display: flex; flex-direction: row;">
-                  <div style="height: 100%; width: 10%; font-size: 15px;">1.</div>
-                  <div onclick="selectCell(this)" style="height: 100%; width: 90%;"></div>
-               </div>
-            </td>
+
+            <th colspan="2" class="c">MODEL</th>
+            <td colspan="3" onclick="selectCell(this)"></td>
+            <td colspan="3" onclick="selectCell(this)"></td>
+            <th colspan="2" class="c" onclick="selectCell(this)">PROD. ENGINEER</th>
             <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="2" onclick="selectCell(this)"></td>
          </tr>
          <tr>
-            <td colspan="1" style="height: 0px;">
-               <div style="height: 100%; display: flex; flex-direction: row;">
-                  <div style="height: 100%; width: 10%; font-size: 15px;">2.</div>
-                  <div onclick="selectCell(this)" style="height: 100%; width: 90%;"></div>
-               </div>
-            </td>
+
+            <th colspan="2" class="c">COLOUR</th>
+            <td colspan="3" onclick="selectCell(this)"></td>
+            <td colspan="3" onclick="selectCell(this)"></td>
+            <th colspan="2" class="c">QA. ENGINEER</th>
+            <!-- <td colspan="1" onclick="selectCell(this)"> -->
+               </th>
+               <!-- <th></th> -->
+            <td colspan="2" onclick="selectCell(this)"></td>
+            <td colspan="2" onclick="selectCell(this)"></td>
+         </tr>
+         <tr>
+            <th class="c" colspan="2">CHECK POINT AS PER PQC STD.</th>
+            <th colspan="2" class="c">SPECIFICATION</th>
+            <th colspan="1">7-9</th>
+            <th colspan="1">9-11</th>
+            <th colspan="1">11-1</th>
+            <th colspan="1">1-3</th>
+            <th colspan="1">3-5</th>
+            <th colspan="1">5-7</th>
+            <th colspan="1">7-9</th>
+            <th colspan="1">9-11</th>
+            <th colspan="1">11-1</th>
+            <th colspan="1">1-3</th>
+            <th colspan="1">3-5</th>
+            <th colspan="1">5-7</th>
+         </tr>
+         <tr>
+            <th class="c" colspan="1">1.</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
             <td colspan="2" onclick="selectCell(this)"></td>
             <td colspan="1" onclick="selectCell(this)"></td>
             <td colspan="1" onclick="selectCell(this)"></td>
@@ -382,17 +355,32 @@
             <td colspan="1" onclick="selectCell(this)"></td>
             <td colspan="1" onclick="selectCell(this)"></td>
             <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+
+         </tr>
+         <tr>
+            <th class="c" colspan="1">2.</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="2" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <th colspan="1" onclick="selectCell(this)"></th>
+            <th colspan="1" onclick="selectCell(this)"></th>
+            <th colspan="1" onclick="selectCell(this)"></th>
+            <th colspan="1" onclick="selectCell(this)"></th>
+            <th colspan="1" onclick="selectCell(this)"></th>
+            <th colspan="1" onclick="selectCell(this)">
+               </td>
             <td colspan="1" onclick="selectCell(this)"></td>
             <td colspan="1" onclick="selectCell(this)"></td>
             <td colspan="1" onclick="selectCell(this)"></td>
          </tr>
          <tr>
-            <td colspan="1" style="height: 0px;">
-               <div style="height: 100%; display: flex; flex-direction: row;">
-                  <div style="height: 100%; width: 10%; font-size: 15px;">3.</div>
-                  <div onclick="selectCell(this)" style="height: 100%; width: 90%;"></div>
-               </div>
-            </td>
+            <th class="c" colspan="1">3.</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
             <td colspan="2" onclick="selectCell(this)"></td>
             <td colspan="1" onclick="selectCell(this)"></td>
             <td colspan="1" onclick="selectCell(this)"></td>
@@ -407,13 +395,26 @@
             <td colspan="1" onclick="selectCell(this)"></td>
             <td colspan="1" onclick="selectCell(this)"></td>
          </tr>
+         <!-- <tr>
+            <th class="c" colspan="1">4.</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="2" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+         </tr> -->
          <tr>
-            <td colspan="1" style="height: 0px;">
-               <div style="height: 100%; display: flex; flex-direction: row;">
-                  <div style="height: 100%; width: 10%; font-size: 15px;">4.</div>
-                  <div onclick="selectCell(this)" style="height: 100%; width: 90%;"></div>
-               </div>
-            </td>            
+            <th class="c" colspan="1">4.</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
             <td colspan="2" onclick="selectCell(this)"></td>
             <td colspan="1" onclick="selectCell(this)"></td>
             <td colspan="1" onclick="selectCell(this)"></td>
@@ -429,12 +430,8 @@
             <td colspan="1" onclick="selectCell(this)"></td>
          </tr>
          <tr>
-            <td colspan="1" style="height: 0px;">
-               <div style="height: 100%; display: flex; flex-direction: row;">
-                  <div style="height: 100%; width: 10%; font-size: 15px;">5.</div>
-                  <div onclick="selectCell(this)" style="height: 100%; width: 90%;"></div>
-               </div>
-            </td>
+            <th class="c" colspan="1">5.</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
             <td colspan="2" onclick="selectCell(this)"></td>
             <td colspan="1" onclick="selectCell(this)"></td>
             <td colspan="1" onclick="selectCell(this)"></td>
@@ -448,566 +445,570 @@
             <td colspan="1" onclick="selectCell(this)"></td>
             <td colspan="1" onclick="selectCell(this)"></td>
             <td colspan="1" onclick="selectCell(this)"></td>
+         </tr>
+
+         <tr>
+            <th class="c" colspan="1">6.</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="2" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+         </tr>
+         <tr>
+            <th class="c" colspan="1">7.</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="2" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+         </tr>
+         <tr>
+            <th class="c" colspan="1">8.</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="2" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+         </tr>
+         <tr>
+            <th class="c" colspan="1">9.</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="2" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+         </tr>
+         <tr>
+            <th class="c" colspan="1">10.</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="2" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+         </tr>
+         <tr>
+            <th colspan="2" class="c">Component Weight(gm)</th>
+            <th colspan="2">AS PER WEIGHT LIST</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+         </tr>
+         <tr>
+            <th colspan="2" class="c">No Flashes</th>
+            <th colspan="2">VISUAL</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+         </tr>
+         <tr>
+            <th colspan="2" class="c">No Flow mark</th>
+            <th colspan="2">VISUAL</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+         </tr>
+         <tr>
+            <th colspan="2" class="c">No Scratch/Weld line/Flow line</th>
+            <th colspan="2">VISUAL</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+         </tr>
+         <tr>
+            <th colspan="2" class="c">No Crack/Broken</th>
+            <th colspan="2">VISUAL</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+         </tr>
+         <tr>
+            <th colspan="2" class="c">No Short molding</th>
+            <th colspan="2">VISUAL</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+         </tr>
+         <tr>
+            <th colspan="2" class="c">No Short molding</th>
+            <th colspan="2">VISUAL</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+         </tr>
+         <tr>
+            <th colspan="2" class="c">No color Mismatch(appearance)</th>
+            <th colspan="2">VISUAL</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+         </tr>
+         <tr>
+            <th colspan="2" class="c">No Rubbing mark/Bubble</th>
+            <th colspan="2">VISUAL</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+         </tr>
+         <tr>
+            <th colspan="2" class="c">No Black/white spot</th>
+            <th colspan="2">VISUAL</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+         </tr>
+         <tr>
+            <th colspan="2" class="c">No Spray mark</th>
+            <th colspan="2">VISUAL</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+         </tr>
+         <tr>
+            <th colspan="2" class="c">Fitment with matching part</th>
+            <th colspan="2">VISUAL</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+         </tr>
+         <tr>
+            <th colspan="2" class="c">Assembly</th>
+            <th colspan="2">VISUAL</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+         </tr>
+         <tr>
+            <th colspan="2" class="c">Packing as per std.</th>
+            <th colspan="2">VISUAL/PHYSICAL</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+         </tr>
+
+         <tr>
+            <th colspan="2" class="c">M/c Counter Reading</th>
+            <th colspan="2">BY M/C COUNTER</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+         </tr>
+
+         <tr>
+            <th colspan="2" class="c">Rejection</th>
+            <th colspan="2">PHYSICAL COUNTER</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+         </tr>
+
+
+
+         <tr>
+            <th colspan="3" class="c">Process Parameter according tom SPP</th>
+            <th colspan="1">Visual/Physical</th>
+            <th colspan="2">Content</th>
+            <th colspan="2">Standard</th>
+            <th colspan="2">11AM</th>
+            <th colspan="2">4PM</th>
+            <th colspan="2">11PM</th>
+            <th colspan="2">4AM</th>
+         </tr>
+
+
+         <tr>
+            <th colspan="2" class="c" >Signature</th>
+            <th colspan="1">QA Engineer</th>
+            <th colspan="1">Process Engineer</th>
+            <th colspan="2">Cycle Time</th>
+            <td colspan="2" onclick="selectCell(this)"></td>
+            <td colspan="2" onclick="selectCell(this)"></td>
+            <td colspan="2" onclick="selectCell(this)"></td>
+            <td colspan="2" onclick="selectCell(this)"></td>
+            <td colspan="2" onclick="selectCell(this)"></td>
+
+         </tr>
+
+         <tr>
+            <th colspan="2" class="c">Shift-A</th>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <td colspan="1" onclick="selectCell(this)"></td>
+            <th colspan="2">Cooloing Time</th>
+            <td colspan="2" onclick="selectCell(this)"></td>
+            <td colspan="2" onclick="selectCell(this)"></td>
+            <td colspan="2" onclick="selectCell(this)"></td>
+            <td colspan="2" onclick="selectCell(this)"></td>
+            <td colspan="2" onclick="selectCell(this)"></td>
+
+         </tr>
+
+         <th colspan="2" class="c">Shift-B</th>
+         <td colspan="1" onclick="selectCell(this)"></td>
+         <td colspan="1" onclick="selectCell(this)"></td>
+         <th colspan="2">Short size</th>
+         <td colspan="2" onclick="selectCell(this)"></td>
+         <td colspan="2" onclick="selectCell(this)"></td>
+         <td colspan="2" onclick="selectCell(this)"></td>
+         <td colspan="2" onclick="selectCell(this)"></td>
+         <td colspan="2" onclick="selectCell(this)"></td>
+         </tr>
+
+
+         <tr>
+            <th colspan="2" class="c">Approved by</th>
+            <th colspan="2">Checked by</th>
+            <th colspan="2">Nozzel Temp.</th>
+            <td colspan="2" onclick="selectCell(this)"></td>
+            <td colspan="2" onclick="selectCell(this)"></td>
+            <td colspan="2" onclick="selectCell(this)"></td>
+            <td colspan="2" onclick="selectCell(this)"></td>
+            <td colspan="2" onclick="selectCell(this)"></td>
+
+         </tr>
+
+         <tr>
+            <td colspan="2" onclick="selectCell(this)"></td>
+            <td colspan="2" onclick="selectCell(this)"></td>
+            <th colspan="2">Injection Time</th>
+            <td colspan="2" onclick="selectCell(this)"></td>
+            <td colspan="2" onclick="selectCell(this)"></td>
+            <td colspan="2" onclick="selectCell(this)"></td>
+            <td colspan="2" onclick="selectCell(this)"></td>
+            <td colspan="2" onclick="selectCell(this)"></td>
+         </tr>
+
+         <tr>
+            <th colspan="16" class="c">As per customer specific requirement above mention dimension reading are considered for SPC</th>
+         </tr>
+
+
+
+         <tr>
+            <th colspan="16" class="c">Format History</th>
+         </tr>
+         <tr>
+
+            <th colspan="1" class="c">S.N.</th>
+            <th colspan="2">Before</th>
+            <th colspan="1">Change details</th>
+            <th colspan="10">Reason of change</th>
+            <th colspan="3">Effective date</th>
          </tr>
         
-         <tr>
-            <td colspan="1" style="height: 0px;">
-               <div style="height: 100%; display: flex; flex-direction: row;">
-                  <div style="height: 100%; width: 10%; font-size: 15px;">6.</div>
-                  <div onclick="selectCell(this)" style="height: 100%; width: 90%;"></div>
-               </div>
-            </td>            
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-         </tr>
-         <tr>
-            <td colspan="1" style="height: 0px;">
-               <div style="height: 100%; display: flex; flex-direction: row;">
-                  <div style="height: 100%; width: 10%; font-size: 15px;">7.</div>
-                  <div onclick="selectCell(this)" style="height: 100%; width: 90%;"></div>
-               </div>
-            </td>            
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-         </tr>
-         <tr>
-            <td colspan="1" style="height: 0px;">
-               <div style="height: 100%; display: flex; flex-direction: row;">
-                  <div style="height: 100%; width: 10%; font-size: 15px;">8.</div>
-                  <div onclick="selectCell(this)" style="height: 100%; width: 90%;"></div>
-               </div>
-            </td>            
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-         </tr>
-         <tr>
-            <td colspan="1" style="height: 0px;">
-               <div style="height: 100%; display: flex; flex-direction: row;">
-                  <div style="height: 100%; width: 10%; font-size: 15px;">9.</div>
-                  <div onclick="selectCell(this)" style="height: 100%; width: 90%;"></div>
-               </div>
-            </td>            
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-         </tr>
-         <tr>
-            <td colspan="1" style="height: 0px;">
-               <div style="height: 100%; display: flex; flex-direction: row;">
-                  <div style="height: 100%;font-size: 15px;">10.</div>
-                  <div onclick="selectCell(this)" style="height: 100%; width: 90%;"></div>
-               </div>
-            </td>            
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-         </tr>
-          <tr>
-            <td colspan="1" class="c" >Component Weight(gm)</td>
-            <td colspan="2" >AS PER WEIGHT LIST</td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-         </tr>
-         <tr>
-            <td colspan="1" class="c">No Flashes</td>
-            <td colspan="2" >VISUAL</td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-         </tr>
-         <tr>
-            <td colspan="1" class="c">No Flow mark</td>
-            <td colspan="2">VISUAL</td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-         </tr>
-         <tr>
-            <td colspan="1" class="c">No Scratch/Weld line/Flow line</td>
-            <td colspan="2">VISUAL</td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-         </tr>
-         <tr>
-            <td colspan="1" class="c">No Crack/Broken</td>
-            <td colspan="2">VISUAL</td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-         </tr>
-         <tr>
-            <td colspan="1" class="c">No Silver mark/Warpage</td>
-            <td colspan="2">VISUAL</td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-         </tr>
-         <tr>
-            <td colspan="1" class="c">No Short molding</td>
-            <td colspan="2">VISUAL</td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-         </tr>
-         <tr>
-            <td colspan="1" class="c">No color Mismatch(appearance)</td>
-            <td colspan="2">VISUAL</td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-         </tr>
-         <tr>
-            <td colspan="1" class="c">No Rubbing mark/Bubble</td>
-            <td colspan="2">VISUAL</td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-         </tr>
-         <tr>
-            <td colspan="1" class="c">No Black/white spot</td>
-            <td colspan="2">VISUAL</td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-         </tr>
-         <tr>
-            <td colspan="1" class="c">No Spray mark</td>
-            <td colspan="2">VISUAL</td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-         </tr>
-         <tr>
-            <td colspan="1" class="c">Fitment with matching part</td>
-            <td colspan="2">VISUAL</td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-         </tr>
-         <tr>
-            <td colspan="1" class="c">Assembly</td>
-            <td colspan="2">VISUAL</td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-         </tr>
-         <tr>
-            <td colspan="1" class="c">Packing as per std.</td>
-            <td colspan="2" >VISUAL/PHYSICAL</td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-         </tr>
-         <tr>
-            <td colspan="1" class="c">M/c Counter Reading</td>
-            <td colspan="2">BY M/C COUNTER</td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-         </tr>
-         <tr>
-            <td colspan="1" class="c">REJECTION</td>
-            <td colspan="2">PHYSICAL COUNTER</td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-         </tr>
-         <tr>
-            <td colspan="2" class="c">Process Parameter according to SPP</td>
-            <td colspan="1" >Visual/Physical</td>
-            <td colspan="2" >Content</td>
-            <td colspan="2" >Standard</td>
-            <td colspan="2" >11AM</td>
-            <td colspan="2" >4PM</td>
-            <td colspan="2" >11PM</td>
-            <td colspan="2" >4AM</td>
-         </tr>
-         <tr>
-            <td colspan="1" >Signature</td>
-            <td colspan="1" >QA Engineer</td>
-            <td colspan="1" >Process Engineer</td>
-            <td colspan="2" >Cycle Time</td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-         </tr> 
-         <tr>
-            <td colspan="1" >Shift-A</td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="2" >Cooling Time</td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-         </tr>
-         <tr>
-            <td colspan="1" >Shift-B</td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="2" >Short Size</td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-         </tr>
-         <tr>
-            <td colspan="2" rowspan="2"  style="height: 0px;">
-               <div style="height: 100%; display: flex; flex-direction: column;">
-                  <div style="height: 100%; width: 100%; text-align: center;">Approved by:</div>
-                  <div onclick="selectCell(this)" style="height: 100%; width: 100%;"></div>
-               </div>
-            </td>            
-            <td colspan="2" rowspan="2"  style="height: 0px;">
-               <div style="height: 100%; display: flex; flex-direction: column;">
-                  <div style="height: 100%; width: 100%; text-align: center;">Checked by:</div>
-                  <div onclick="selectCell(this)" style="height: 100%; width: 100%;"></div>
-               </div>
-            </td>              
-            <td colspan="2" >Nozzle Temp.</td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-         </tr>
-         <tr>
-            
-            <td colspan="2" >Injection Time</td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-            <td colspan="2" onclick="selectCell(this)"></td>
-         </tr>
-         <tr>
-            <td colspan="15" class="c">Remarks: As per customer specific requirement above mention dimention reading are considered for SPC;</td>
-         </tr>
-         <tr>
-            <td colspan="15" class="c">Format History</td>
-         </tr>
-         <tr>
-            <td colspan="1" >Before</td>
-            <td colspan="1" >Change details</td>
-            <td colspan="10" >Reason of change</td>
-            <td colspan="3" >Effective date</td>
-         </tr>
-         <tr>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="1" onclick="selectCell(this)"></td>
-            <td colspan="10" onclick="selectCell(this)"></td>
-            <td colspan="3" onclick="selectCell(this)">.</td>
-         </tr>
-        
-
-
 
       </tbody>
+   </table>
 
 
-    
-</table>
 
-<script>
-    let selectedOption = '';
-let activeCell = null;
+   <script>
+      let selectedOption = '';
+      let activeCell = null;
+      let currentSheet = 1; // Default to Sheet 1
 
-function setSelectedOption(option) {
-    selectedOption = option;
-    if (activeCell) {
-        fillCell(activeCell);
-    }
-}
+      function setSelectedOption(option) {
+         selectedOption = option;
+         if (activeCell) {
+            fillCell(activeCell);
+         }
+      }
 
-function selectCell(cell) {
-    if (activeCell) {
-        activeCell.classList.remove('selected');
-    }
-    activeCell = cell;
-    cell.classList.add('selected');
-}
+      function selectCell(cell) {
+         if (activeCell) {
+            activeCell.classList.remove('selected');
+         }
+         activeCell = cell;
+         cell.classList.add('selected');
+      }
 
-function fillCell(cell) {
-    cell.innerHTML = selectedOption;
-    cell.classList.remove('selected');
-    activeCell = null;
-    saveTableData(); // Save data after filling the cell
-}
+      function fillCell(cell) {
+         cell.innerHTML = selectedOption;
+         cell.classList.remove('selected');
+         activeCell = null;
+         saveTableData(); // Save data after filling the cell
+      }
 
-function enterText() {
-    if (!activeCell) {
-        alert('Please select a cell first!');
-        return;
-    }
-    let text = prompt('Enter text:');
-    if (text !== null) {
-        activeCell.innerHTML = text;
-        activeCell.classList.remove('selected');
-        activeCell = null;
-        saveTableData(); // Save data after entering text
-    }
-}
+      function enterText() {
+         if (!activeCell) {
+            alert('Please select a cell first!');
+            return;
+         }
+         let text = prompt('Enter text:');
+         if (text !== null) {
+            activeCell.innerHTML = text;
+            activeCell.classList.remove('selected');
+            activeCell = null;
+            saveTableData(); // Save data after entering text
+         }
+      }
 
-function saveTableData() {
-    const tableData = [];
-    const rows = document.querySelectorAll('#dataTable tbody tr');
-    rows.forEach(row => {
-        const rowData = [];
-        const cells = row.querySelectorAll('td');
-        cells.forEach(cell => {
-            rowData.push(cell.innerHTML);
-        });
-        tableData.push(rowData);
-    });
-    localStorage.setItem('tableData', JSON.stringify(tableData));
-}
-
-function loadTableData() {
-    const savedData = localStorage.getItem('tableData');
-    if (savedData) {
-        const tableData = JSON.parse(savedData);
-        const rows = document.querySelectorAll('#dataTable tbody tr');
-        rows.forEach((row, rowIndex) => {
+      function saveTableData() {
+         const tableData = [];
+         const rows = document.querySelectorAll('#dataTable tbody tr');
+         rows.forEach(row => {
+            const rowData = [];
             const cells = row.querySelectorAll('td');
-            cells.forEach((cell, cellIndex) => {
-                if (tableData[rowIndex] && tableData[rowIndex][cellIndex] !== undefined) {
-                    cell.innerHTML = tableData[rowIndex][cellIndex];
-                }
+            cells.forEach(cell => {
+               rowData.push(cell.innerHTML);
             });
-        });
-    }
-}
+            tableData.push(rowData);
+         });
+         localStorage.setItem(`tableData_sheet${currentSheet}`, JSON.stringify(tableData));
+      }
 
-// Load data when the page loads
-window.onload = loadTableData;
+      function loadTableData() {
+         const savedData = localStorage.getItem(`tableData_sheet${currentSheet}`);
+         if (savedData) {
+            const tableData = JSON.parse(savedData);
+            const rows = document.querySelectorAll('#dataTable tbody tr');
+            rows.forEach((row, rowIndex) => {
+               const cells = row.querySelectorAll('td');
+               cells.forEach((cell, cellIndex) => {
+                  if (tableData[rowIndex] && tableData[rowIndex][cellIndex] !== undefined) {
+                     cell.innerHTML = tableData[rowIndex][cellIndex];
+                  }
+               });
+            });
+         } else {
+            // Clear table if no data is available for the sheet
+            const rows = document.querySelectorAll('#dataTable tbody tr');
+            rows.forEach(row => {
+               const cells = row.querySelectorAll('td');
+               cells.forEach(cell => {
+                  cell.innerHTML = '';
+               });
+            });
+         }
+      }
 
-// print table
-function printTable() {
-   window.print();
-}
+      function switchSheet(sheetNumber) {
+         saveTableData(); // Save current sheet data
+         currentSheet = sheetNumber; // Update current sheet
+         loadTableData(); // Load data for the new sheet
+         updateActiveButton(); // Update active button color
+      }
 
-function backToIndex() {
-   window.history.back();
-}
+      function updateActiveButton() {
+         const buttons = document.querySelectorAll('.sheet-buttons button');
+         buttons.forEach(button => button.classList.remove('active'));
+         document.getElementById(`sheet${currentSheet}`).classList.add('active');
+      }
 
-function backToIndex() {
-   window.location.href = '../main_page/index.html';
-}
+      // Load initial data and highlight the default sheet button when the page loads
+      window.onload = () => {
+         loadTableData();
+         updateActiveButton();
+      };
 
-function clearTableData() {
-   if(confirm("Are you sure you want to reset?")) {
-      localStorage.removeItem('tableData');
-      location.reload();
-   }
- 
-}
+      function printTable() {
+         window.print();
+      }
+
+      function backToIndex() {
+         window.history.back();
+      }
+      // function backToIndex() {
+      //       window.location.href = '../main_page/index.html';
+      //   }
+
+      function clearTableData() {
+         if(confirm("Are you sure you want to reset?")) {
+            localStorage.removeItem(`tableData_sheet${currentSheet}`);
+            loadTableData(currentSheet);
+         }
+      }
 
 
-</script>
+   </script>
+</body>
 
-
-</body>  
 </html>
